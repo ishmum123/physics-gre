@@ -28,3 +28,6 @@ per-item physics review (every drill/checkpoint/test key reworked; defects fixed
   More test questions per module would improve mock variety.
 - Import real past-paper questions (ETS releases 4 practice tests) as an optional bank.
 - Track checkpoint answers in progress (currently unrecorded).
+
+## Deployment
+GitHub Pages from `main` root: https://ishmum123.github.io/phys-gre/ (repo ishmum123/phys-gre). Push to main redeploys.
