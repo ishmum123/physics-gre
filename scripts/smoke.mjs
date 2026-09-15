@@ -216,7 +216,13 @@ function checkContentWarnings(modId, item, field, text) {
   if (BAD_CHAR_RE.test(text)) {
     warn(modId, item, field, "contains a literal middle dot (·) or \\textsuperscript — both tend to break or misrender in KaTeX; use \\cdot or ^{} instead");
   }
+  // Options are shuffled at render time, so a solution/explanation that says
+  // "option 2" or "(B)" points at the wrong thing for most learners.
+  if (/solution|explain/.test(field) && OPTION_REF_RE.test(text)) {
+    warn(modId, item, field, "refers to an option by number/letter; options are shuffled at render — name the option's content instead");
+  }
 }
+const OPTION_REF_RE = /\boption\s*(\d|[A-E])\b|\(([A-E])\)\s|\bchoice\s*(\d|[A-E])\b/;
 
 // ---- MC answer-key position bias ------------------------------------
 // Content authors keying answers non-uniformly (e.g. "B" a suspicious
