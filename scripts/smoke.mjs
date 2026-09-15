@@ -222,7 +222,7 @@ function checkContentWarnings(modId, item, field, text) {
     warn(modId, item, field, "refers to an option by number/letter; options are shuffled at render — name the option's content instead");
   }
 }
-const OPTION_REF_RE = /\boption\s*(\d|[A-E])\b|\(([A-E])\)\s|\bchoice\s*(\d|[A-E])\b/;
+const OPTION_REF_RE = /\boption\s*(\d|[A-E])\b|(?<![A-Za-z])\(([A-E])\)\s|\bchoice\s*(\d|[A-E])\b/;
 
 // ---- MC answer-key position bias ------------------------------------
 // Content authors keying answers non-uniformly (e.g. "B" a suspicious
