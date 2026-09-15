@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Physics GRE</title>
+<meta name="description" content="A self-study curriculum, drill trainer, and mock exam for the Physics GRE subject test.">
+<script>
+  // Applied before first paint to avoid a light/dark flash. Reads the same
+  // localStorage key APP.storage uses ("pgre:theme"), by hand, since the
+  // app scripts haven't loaded yet.
+  (function () {
+    try {
+      var raw = window.localStorage.getItem("pgre:theme");
+      var theme = raw ? JSON.parse(raw) : null;
+      if (theme === "light" || theme === "dark") {
+        document.documentElement.setAttribute("data-theme", theme);
+      }
+    } catch (e) { /* ignore: falls back to prefers-color-scheme */ }
+  })();
+</script>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="vendor/fonts/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#/">Physics GRE</a>
+  <nav class="topnav">
+    <a href="#/" data-view="home">curriculum</a>
+    <a href="#/mock" data-view="mock">mock exam</a>
+    <a href="#/progress" data-view="progress">progress</a>
+  </nav>
+  <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme">auto</button>
+</header>
+
+<main id="app-view" class="view"></main>
+<div id="live-region" class="sr-only" aria-live="polite" role="status"></div>
+
+<!-- Vendored libraries (no runtime CDN). -->
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/contrib/auto-render.min.js"></script>
+<script src="vendor/marked/marked.min.js"></script>
+
+<!-- Content: manifest lists module scripts; modules self-register onto
+     window.PGRE.modules when loaded (see content/manifest.js). -->
+<script src="content/manifest.js"></script>
+
+<!-- App engine, in dependency order. -->
+<script src="app/exam-config.js"></script>
+<script src="app/storage.js"></script>
+<script src="app/mathsplit.js"></script>
+<script src="app/render.js"></script>
+<script src="app/leitner.js"></script>
+<script src="app/state.js"></script>
+<script src="app/components.js"></script>
+<script src="app/views/home.js"></script>
+<script src="app/views/lesson.js"></script>
+<script src="app/views/drill.js"></script>
+<script src="app/views/exam.js"></script>
+<script src="app/views/progress.js"></script>
+<script src="app/router.js"></script>
+<script src="app/loader.js"></script>
+</body>
+</html>

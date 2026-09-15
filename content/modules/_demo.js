@@ -1,0 +1,197 @@
+// Development-only demo module. Exercises every field in
+// docs/CONTENT_SCHEMA.md (including `svg` and a numeric drill) so the
+// engine and the content-author smoke test both have something real to
+// run against. Not part of the real curriculum — never add "_demo" to a
+// production manifest.
+window.PGRE = window.PGRE || {};
+window.PGRE.modules = window.PGRE.modules || [];
+window.PGRE.modules.push({
+  id: "_demo",
+  title: "Free fall (demo)",
+  order: 0,
+  greWeight: 0,
+  prereqs: [],
+  blurb: "A worked demo module — not real exam content.",
+  lessons: [
+    {
+      id: "_demo-free-fall",
+      title: "Why every falling object shares one acceleration",
+      minutes: 6,
+      discovery: "Mass cancels out of $F=ma$ for gravity, so heavy and light objects fall together in vacuum.",
+      sections: [
+        {
+          kind: "problem",
+          md: "Drop a hammer and a feather from the same height, at the same instant, in ordinary air. The hammer lands first — obviously. But an astronaut on the Moon drops both and they hit the ground together. What's different, and can you predict *how fast* either one falls without needing two separate formulas for 'heavy things' and 'light things'?",
+        },
+        {
+          kind: "candidates",
+          md: "**A. Heavier objects fall faster** — matches the everyday hammer-and-feather result directly.\n\n**B. All objects fall at the same rate**, and the hammer/feather difference is caused by something else entirely (not mass).\n\n**C. Falling rate depends on shape/surface area**, not mass at all.",
+        },
+        {
+          kind: "failures",
+          md: "**A fails on the Moon:** same masses, no air, and they land together — so mass alone can't be setting the rate.\n\n**C is close but incomplete:** shape matters *only through air resistance*. In a vacuum chamber, a coin and a crumpled ball of paper of very different shapes still fall together, which C alone doesn't explain.\n\nWhat both hammer-and-feather trials share is air. Remove it (Moon, vacuum chamber) and the disagreement disappears.",
+        },
+        {
+          kind: "discovery",
+          md: "The feather isn't slow because it's *light* — it's slow because *air resistance* pushes back on it much more, relative to its weight, than it does on the hammer. Strip air out of the picture and gravity alone remains. Newton's second law says $F = ma$, so $a = F/m$. For gravity, $F = mg$, so $a = mg/m = g$ — the object's own mass cancels. Every object in free fall (no air) shares the exact same acceleration $g$, regardless of what it's made of.",
+        },
+        {
+          kind: "formal",
+          md: "**Free fall**: motion under gravity alone (no air resistance). Near Earth's surface, $g \\approx 9.8\\ \\text{m/s}^2$, directed downward. Constant acceleration gives:\n\n$$v = v_0 + gt$$\n$$h = v_0 t + \\tfrac{1}{2}gt^2$$\n$$v^2 = v_0^2 + 2gh$$\n\nwhere $h$ is the distance fallen and $v_0$ is the initial (downward) speed.",
+        },
+        {
+          kind: "apply",
+          md: "Back to the hammer and feather: on the Moon, $g_{\\text{Moon}} \\approx 1.6\\ \\text{m/s}^2$, and with no air resistance for either object, both reach the ground after the same time $t = \\sqrt{2h/g_{\\text{Moon}}}$ — matching what the Apollo 15 astronauts actually filmed.",
+          svg: "<svg viewBox=\"0 0 200 140\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"20\" y1=\"10\" x2=\"20\" y2=\"120\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"20\" cy=\"20\" r=\"6\" fill=\"currentColor\"/><circle cx=\"20\" cy=\"70\" r=\"6\" fill=\"currentColor\" opacity=\"0.6\"/><circle cx=\"20\" cy=\"115\" r=\"6\" fill=\"currentColor\" opacity=\"0.3\"/><line x1=\"20\" y1=\"120\" x2=\"180\" y2=\"120\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"35\" y=\"24\" font-size=\"11\" fill=\"currentColor\">t=0, v=0</text><text x=\"35\" y=\"74\" font-size=\"11\" fill=\"currentColor\">t=1s, v=g</text><text x=\"35\" y=\"110\" font-size=\"11\" fill=\"currentColor\">t=2s, v=2g</text></svg>",
+        },
+        {
+          kind: "transfer",
+          md: "This 'divide by mass and it cancels' move reappears constantly: gravitational field strength $g = GM/r^2$ doesn't depend on the falling object's mass either, and later you'll see the same cancellation trick used to define electric field $\\mathbf{E} = \\mathbf{F}/q$, independent of the test charge.",
+        },
+      ],
+      checkpoints: [
+        {
+          q: "A bowling ball and a marble are dropped together in a vacuum chamber. What happens?",
+          options: [
+            "The bowling ball lands first, because it's heavier",
+            "The marble lands first, because it's lighter and more streamlined",
+            "They land at the same time, because mass cancels out of the free-fall acceleration",
+            "It depends on the chamber's air pressure setting",
+          ],
+          answer: 2,
+          explain: "With no air resistance, $a=g$ for both regardless of mass — see the **discovery** section above. The chamber removes exactly the variable (air) that made the hammer-and-feather trial misleading.",
+        },
+        {
+          q: "Why does a feather fall slower than a hammer in ordinary air, if not because of its mass?",
+          options: [
+            "It doesn't actually fall slower; that's an illusion",
+            "Air resistance affects it more, relative to its weight, because of its shape and low density",
+            "Gravity is weaker on light objects",
+            "The feather has negative acceleration",
+          ],
+          answer: 1,
+          explain: "Gravity's pull ($mg$) is genuinely smaller on the feather, but air resistance shrinks even faster relative to that pull for a dense, compact hammer than for a light, spread-out feather — so the *ratio* of drag to weight is what differs, not $g$ itself.",
+        },
+      ],
+    },
+  ],
+  drills: [
+    {
+      id: "_demo-free-fall-d1",
+      lesson: "_demo-free-fall",
+      type: "mc",
+      prompt: "A ball is dropped from rest and falls for $2\\ \\text{s}$ near Earth's surface ($g \\approx 9.8\\ \\text{m/s}^2$, ignore air resistance). What is its speed at $t=2\\ \\text{s}$?",
+      options: ["4.9 m/s", "9.8 m/s", "19.6 m/s", "39.2 m/s"],
+      answer: 2,
+      hint: "Use $v = v_0 + gt$ with $v_0 = 0$.",
+      solution: "$v = 0 + (9.8)(2) = 19.6\\ \\text{m/s}$. (39.2 m/s is the common mistake of doubling instead of using $t=2$ correctly with $g\\approx9.8$; 4.9 m/s divides instead of multiplies.)",
+      difficulty: 1,
+      tags: ["kinematics", "free-fall"],
+    },
+    {
+      id: "_demo-free-fall-d2",
+      lesson: "_demo-free-fall",
+      type: "numeric",
+      prompt: "A stone is dropped from rest from a height of $45\\ \\text{m}$. How long does it take to hit the ground? Use $g = 9.8\\ \\text{m/s}^2$.",
+      answer: 3.03,
+      tolerance: 0.03,
+      unit: "s",
+      hint: "Solve $h = \\tfrac{1}{2}gt^2$ for $t$.",
+      solution: "$t = \\sqrt{2h/g} = \\sqrt{2(45)/9.8} = \\sqrt{9.18} \\approx 3.03\\ \\text{s}$.",
+      difficulty: 2,
+      tags: ["kinematics", "free-fall"],
+    },
+    {
+      id: "_demo-free-fall-d3",
+      lesson: "_demo-free-fall",
+      type: "mc",
+      prompt: "On the Moon ($g \\approx 1.6\\ \\text{m/s}^2$), a hammer and a feather are dropped together from the same height in vacuum. Compared to on Earth, the time for either to land is:",
+      options: [
+        "The same, since mass cancels regardless of $g$",
+        "Longer, since $g$ is smaller on the Moon",
+        "Shorter, since there's no air resistance on the Moon",
+        "Impossible to compare without knowing the objects' masses",
+      ],
+      answer: 1,
+      hint: "$t = \\sqrt{2h/g}$ — think about how a smaller $g$ changes $t$ for the same $h$.",
+      solution: "Smaller $g$ in the denominator makes $t=\\sqrt{2h/g}$ larger, so the fall takes longer on the Moon — the mass-cancellation only guarantees the hammer and feather match *each other*, not that timing matches Earth.",
+      difficulty: 2,
+      tags: ["kinematics", "free-fall", "gravity"],
+    },
+    {
+      id: "_demo-free-fall-d4",
+      lesson: "_demo-free-fall",
+      type: "numeric",
+      prompt: "A ball is thrown straight down with initial speed $5\\ \\text{m/s}$ from a $20\\ \\text{m}$ tall building. What is its speed, in m/s, just before hitting the ground? Use $g=9.8\\ \\text{m/s}^2$.",
+      answer: 20.4,
+      tolerance: 0.03,
+      unit: "m/s",
+      hint: "Use $v^2 = v_0^2 + 2gh$.",
+      solution: "$v^2 = 5^2 + 2(9.8)(20) = 25 + 392 = 417$, so $v = \\sqrt{417} \\approx 20.4\\ \\text{m/s}$.",
+      difficulty: 2,
+      tags: ["kinematics", "free-fall"],
+    },
+  ],
+  test: [
+    {
+      id: "_demo-t1",
+      prompt: "An object is dropped from rest and falls freely (no air resistance) for a time $t$. Which expression gives the distance fallen?",
+      options: ["$gt$", "$\\tfrac{1}{2}gt$", "$gt^2$", "$\\tfrac{1}{2}gt^2$", "$2gt^2$"],
+      answer: 3,
+      solution: "Constant acceleration from rest: $h = \\tfrac12 g t^2$. Dimensional check: $[\\text{m/s}^2][\\text{s}^2] = \\text{m}$, consistent; the other options either have the wrong power of $t$ or the wrong numerical factor.",
+      difficulty: 1,
+      tags: ["kinematics", "free-fall"],
+      lesson: "_demo-free-fall",
+    },
+    {
+      id: "_demo-t2",
+      prompt: "Two balls of different mass are dropped simultaneously from the same height in a vacuum. Which statement is correct?",
+      options: [
+        "The heavier ball lands first",
+        "The lighter ball lands first",
+        "They land at the same time regardless of mass",
+        "They land at the same time only if their masses are equal",
+        "It depends on their initial shape",
+      ],
+      answer: 2,
+      solution: "In vacuum, $a=g$ for any mass since $F=mg$ and $a=F/m=g$; mass cancels, so the landing time is identical regardless of mass or shape.",
+      difficulty: 1,
+      tags: ["free-fall", "gravity"],
+      lesson: "_demo-free-fall",
+    },
+    {
+      id: "_demo-t3",
+      prompt: "A ball is thrown straight up with initial speed $v_0$. Ignoring air resistance, what is its speed when it returns to the launch height?",
+      options: ["$0$", "$v_0/2$", "$v_0$", "$2v_0$", "It depends on the mass of the ball"],
+      answer: 2,
+      solution: "By symmetry of constant-acceleration motion (or $v^2=v_0^2+2g\\Delta h$ with $\\Delta h=0$ on return), the speed returning to the same height equals the launch speed $v_0$, just directed downward.",
+      difficulty: 1,
+      tags: ["kinematics", "free-fall"],
+    },
+    {
+      id: "_demo-t4",
+      prompt: "An object falls freely from rest for $3\\ \\text{s}$ near Earth's surface. Approximately how far has it fallen ($g\\approx10\\ \\text{m/s}^2$ for estimation)?",
+      options: ["$15\\ \\text{m}$", "$30\\ \\text{m}$", "$45\\ \\text{m}$", "$60\\ \\text{m}$", "$90\\ \\text{m}$"],
+      answer: 2,
+      solution: "Fast estimate: $h \\approx \\tfrac12(10)(3^2) = \\tfrac12(10)(9) = 45\\ \\text{m}$ — exactly the kind of quick estimation the real exam rewards over exact arithmetic.",
+      difficulty: 1,
+      tags: ["kinematics", "free-fall", "estimation"],
+      lesson: "_demo-free-fall",
+    },
+    {
+      id: "_demo-t5",
+      prompt: "A feather and a coin are dropped together (a) in ordinary air and (b) in vacuum. In which case(s) do they land together?",
+      options: [
+        "(a) only",
+        "(b) only",
+        "Both (a) and (b)",
+        "Neither — mass always determines fall rate",
+        "Only if released with zero initial velocity",
+      ],
+      answer: 1,
+      solution: "Air resistance affects the low-density feather far more than the compact coin, so in air (a) they don't land together; removing air (b) removes that asymmetry and they land together, since gravitational acceleration doesn't depend on mass.",
+      difficulty: 1,
+      tags: ["free-fall", "gravity"],
+    },
+  ],
+});
