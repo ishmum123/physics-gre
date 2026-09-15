@@ -1,7 +1,7 @@
 # Project notes
 
 ## Status (2026-09-15)
-Static site complete: 9 modules, 81 lessons, 365 drills, 166 test questions. All modules pass
+Static site complete: 9 modules, 87 lessons, 413 drills, 191 test questions (after 2026-09-15 ETS syllabus gap fill: partial derivatives, heat transfer, fields in matter, identical particles, perturbation theory, particles in matter, Stark/Zeeman, Bragg, computation items). All modules pass
 `scripts/smoke.mjs` (schema + KaTeX render + HTML/scratch-text checks) and an independent
 per-item physics review (every drill/checkpoint/test key reworked; defects fixed).
 
