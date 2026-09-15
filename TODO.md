@@ -30,4 +30,4 @@ per-item physics review (every drill/checkpoint/test key reworked; defects fixed
 - Track checkpoint answers in progress (currently unrecorded).
 
 ## Deployment
-GitHub Pages from `main` root: https://ishmum123.github.io/phys-gre/ (repo ishmum123/phys-gre). Push to main redeploys.
+GitHub Pages from `main` root: https://ishmum123.github.io/physics-gre/ (repo ishmum123/physics-gre). Push to main redeploys.
