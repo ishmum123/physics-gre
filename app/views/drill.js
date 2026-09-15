@@ -128,7 +128,8 @@ window.APP.views = window.APP.views || {};
     function renderNumericInput(drill) {
       return (
         '<div class="numeric-row">' +
-        '<input type="number" step="any" id="numeric-input" aria-label="Your answer">' +
+        '<input type="text" inputmode="decimal" autocomplete="off" ' +
+        'placeholder="e.g. 0.75 or 3/4" id="numeric-input" aria-label="Your answer, as a decimal or a/b fraction">' +
         (drill.unit ? '<span class="numeric-unit mono">' + esc(drill.unit) + "</span>" : "") +
         "</div>"
       );
@@ -173,7 +174,7 @@ window.APP.views = window.APP.views || {};
     function submitNumeric(drill) {
       if (answered) return;
       const input = stage.querySelector("#numeric-input");
-      const value = parseFloat(input.value);
+      const value = window.APP.progress.parseNumericInput(input.value);
       const correct = window.APP.progress.checkNumeric(value, drill.answer, drill.tolerance);
       input.disabled = true;
       stage.querySelector("#submit-btn").disabled = true;

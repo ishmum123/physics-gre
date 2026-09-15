@@ -169,6 +169,24 @@ window.APP = window.APP || {};
   }
 
   // ---- Numeric drill tolerance check ----------------------------------
+  // Accepts a plain decimal ("0.3333") or a simple signed fraction "a/b"
+  // ("1/3", "-22/7", "22 / 7"). Returns NaN for anything else, so callers
+  // can treat NaN the same as an unparseable/blank input.
+  function parseNumericInput(raw) {
+    if (typeof raw !== "string") return NaN;
+    const s = raw.trim();
+    if (s === "") return NaN;
+    const fracMatch = s.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(-?\d+(?:\.\d+)?)$/);
+    if (fracMatch) {
+      const num = parseFloat(fracMatch[1]);
+      const den = parseFloat(fracMatch[2]);
+      if (den === 0) return NaN;
+      return num / den;
+    }
+    if (!/^[+-]?(\d+\.?\d*|\.\d+)$/.test(s)) return NaN;
+    return parseFloat(s);
+  }
+
   function checkNumeric(value, answer, tolerance) {
     const tol = typeof tolerance === "number" ? tolerance : (window.APP.EXAM ? window.APP.EXAM.numericToleranceDefault : 0.03);
     if (typeof value !== "number" || isNaN(value)) return false;
@@ -181,7 +199,7 @@ window.APP = window.APP || {};
     getTestRecord, recordTestResult,
     mockHistory, recordMockResult,
     moduleStats, weakTags, overallProgressPercent,
-    resetAll, checkNumeric,
+    resetAll, checkNumeric, parseNumericInput,
   };
 
   window.APP.data = data;
